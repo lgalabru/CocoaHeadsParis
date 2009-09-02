@@ -62,8 +62,8 @@
 	
 	// Create Spirit Cafe annotation
 	mSpiritCafeAnnotation = [[[Annotation alloc] init] retain];
-	[mSpiritCafeAnnotation setTitle:@"CocoaHeads Paris #5"];
-	[mSpiritCafeAnnotation setSubtitle:@"Click on the logo for details... "]; 
+	[mSpiritCafeAnnotation setTitle:@"CocoaHeads Paris"];
+	[mSpiritCafeAnnotation setSubtitle:@"Session 5"]; 
 	[mSpiritCafeAnnotation setCurrentPoint:[NSNumber numberWithInt:1]];
 	[mSpiritCafeAnnotation setCoordinate:[mSpiritCafeLocation coordinate]];
 	[mMapView addAnnotation:mSpiritCafeAnnotation];
@@ -207,22 +207,20 @@
 									reuseIdentifier:@"currentlocation"];
 	[mPinView setPinColor:MKPinAnnotationColorRed];
 
-	// Create a custom button
-	UIButton *mDetailButton = [UIButton buttonWithType:UIButtonTypeCustom];
-	[mDetailButton setFrame:CGRectMake(0, 0, 23, 23)];
-	[mDetailButton setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
-	[mDetailButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
 	
-	// Set the image for the button
-	[mDetailButton setImage:[UIImage imageNamed:@"logo_croissant_pinpoint.png"]
-					forState:UIControlStateNormal];
-
+	UIImageView *imageView;
+	imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo_croissant_pinpoint.png"]];
+	[imageView autorelease];
+	
 	postag = [[annotation currentPoint] intValue];
 	
-	[mDetailButton setTag:postag];
+	UIButton * button;
+	button = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+	[button setTag:postag];
 	
 	// Set the button as the callout view
-	[mPinView setRightCalloutAccessoryView:mDetailButton];
+	[mPinView setLeftCalloutAccessoryView:imageView];
+	[mPinView setRightCalloutAccessoryView:button];
 	[mPinView setAnimatesDrop:YES];
 	[mPinView setCanShowCallout:YES];
 	[mPinView setCalloutOffset:CGPointMake(-5, 5)];
