@@ -227,7 +227,7 @@
 	[mPinView setCanShowCallout:YES];
 	[mPinView setCalloutOffset:CGPointMake(-5, 5)];
 	
-	return mPinView;
+	return [mPinView autorelease];
 }
 
 // Tell that one or more annotation views were added to the map.
